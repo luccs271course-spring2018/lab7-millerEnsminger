@@ -3,6 +3,7 @@ package edu.luc.cs271.linkedstack;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
+import java.util.*;
 
 public class LinkedStack<E> implements IStack<E>{
 
@@ -70,22 +71,26 @@ public class LinkedStack<E> implements IStack<E>{
 
   @Override
 public List<E> asList() {
-  final ArrayList<E> result = new ArrayList<>(size);
-  populateList(null, result); // TODO replace null with the right reference
+  final ArrayList<E> result = new ArrayList<>();
+  populateList(top, result); //  replace null with the right reference
   return result;
 }  
 private void populateList(final Node<E> curr, final List<E> result) {
-  // TODO recursively populate the list in the desired order
+  //  recursively populate the list in the desired order
+  result.add(curr.data);
+  populateList(curr.next, result);
 }
 
 @Override
 public List<E> asFifoList() {
-  final ArrayList<E> result = new ArrayList<>(size);
-  populateFifoList(null, result); // TODO replace null with the right reference
+  final ArrayList<E> result = new ArrayList<>();
+  populateFifoList(top, result); //  replace null with the right reference
   return result;
 }
 
 private void populateFifoList(final Node<E> curr, final List<E> result) {
-  // TODO recursively populate the list in the desired order
+  //  recursively populate the list in the desired order
+  result.add(0,curr.data);
+  populateList(curr.next, result);
 }
 }
