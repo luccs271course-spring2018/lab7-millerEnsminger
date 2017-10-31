@@ -2,45 +2,44 @@ package edu.luc.cs271.linkedstack;
 
 import static org.junit.Assert.*;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.NoSuchElementException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.NoSuchElementException;
-
 public class TestLinkedStack {
 
-	private IStack<String> fixture;
-	
-	@Before
-	public void setUp() {
-		fixture = new LinkedStack<>();
-	}
+  private IStack<String> fixture;
 
-	@After
-	public void tearDown() {
-		fixture = null;
-	}
+  @Before
+  public void setUp() {
+    fixture = new LinkedStack<>();
+  }
 
-	@Test
-	public void testInitial() {
-		assertTrue(fixture.isEmpty());
-		try {
-		  fixture.pop();
-		  fail("java.util.NoSuchElementException expected");
+  @After
+  public void tearDown() {
+    fixture = null;
+  }
+
+  @Test
+  public void testInitial() {
+    assertTrue(fixture.isEmpty());
+    try {
+      fixture.pop();
+      fail("java.util.NoSuchElementException expected");
     } catch (final NoSuchElementException ex) {
-		  // exception occurred => all good
+      // exception occurred => all good
     }
-	}
+  }
 
-	@Test
+  @Test
   public void testAfterPush() {
-	  final String value = "hello";
-	  fixture.push(value);
-	  assertFalse(fixture.isEmpty());
-	  assertEquals(value, fixture.peek());
+    final String value = "hello";
+    fixture.push(value);
+    assertFalse(fixture.isEmpty());
+    assertEquals(value, fixture.peek());
   }
 
   @Test
@@ -82,21 +81,22 @@ public class TestLinkedStack {
     final List<String> list2 = fixture.asList();
     assertEquals(2, list2.size());
   }
-  @Test
-public void testAsFifoListEmpty() {
-  assertEquals(0, fixture.asFifoList().size());
-}
 
-@Test
-public void testAsFifoListNonempty() {
-  final String value1 = "hello";
-  final String value2 = "world";
-  fixture.push(value1);
-  fixture.push(value2);
-  final List<String> list = fixture.asFifoList();
-  assertEquals(2, list.size());
-  assertEquals(Arrays.asList(value1, value2), list);
-  final List<String> list2 = fixture.asFifoList();
-  assertEquals(2, list2.size());
-}  
+  @Test
+  public void testAsFifoListEmpty() {
+    assertEquals(0, fixture.asFifoList().size());
+  }
+
+  @Test
+  public void testAsFifoListNonempty() {
+    final String value1 = "hello";
+    final String value2 = "world";
+    fixture.push(value1);
+    fixture.push(value2);
+    final List<String> list = fixture.asFifoList();
+    assertEquals(2, list.size());
+    assertEquals(Arrays.asList(value2, value1), list);
+    final List<String> list2 = fixture.asFifoList();
+    assertEquals(2, list2.size());
+  }
 }

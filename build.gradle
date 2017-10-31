@@ -8,6 +8,7 @@ buildscript {
     }
 }
 
+
 apply plugin: 'application'
 apply plugin: 'com.github.ben-manes.versions'
 apply plugin: 'com.github.sherter.google-java-format'
@@ -35,4 +36,9 @@ tasks.withType(JavaCompile) {
 
 tasks.withType(JavaExec) {
     jvmArgs << "-enableassertions"
+}
+googleJavaFormat {
+
+toolVersion = '1.4'
+
 }
